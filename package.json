@@ -1,8 +1,8 @@
 {
-  "name": "@zaproxy/actions-common-scans",
+  "name": "@deviavir/actions-common-scans",
   "version": "0.2.1",
   "description": "ZAP scan common code",
-  "homepage": "https://github.com/zaproxy/actions-common/tree/master/packages/scans",
+  "homepage": "https://github.com/deviavir/actions-common/tree/master/packages/scans",
   "license": "Apache-2.0",
   "type": "module",
   "exports": "./dist/index.js",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:zaproxy/actions-common.git"
+    "url": "git+ssh://git@github.com/deviavir/actions-common.git"
   },
   "keywords": [
     "GitHub",
@@ -28,7 +28,7 @@
   ],
   "author": "ZAP Team",
   "bugs": {
-    "url": "https://github.com/zaproxy/actions-common/issues"
+    "url": "https://github.com/deviavir/actions-common/issues"
   },
   "dependencies": {
     "@actions/artifact": "^1.1.0",
