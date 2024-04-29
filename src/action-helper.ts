@@ -255,28 +255,33 @@ const actionHelper = {
         run_id: runnerID as unknown as number,
       });
 
+      console.log(`artifactList: ${JSON.stringify(artifactList.data)}`);
+
       const artifacts = artifactList.data.artifacts;
       let artifactID;
       if (artifacts.length !== 0) {
         artifacts.forEach((a: any) => {
           if (a.name === artifactName) {
+            console.log(`zap_scan artifact found with id: ${a.id}`);
             artifactID = a.id;
           }
         });
       }
 
       if (artifactID !== undefined) {
-        const download = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/zip', {
+        const download = await octokit.request('GET /repos/{owner}/{repo}/actions/artifacts/{artifact_id}/{archive_format}', {
           owner: owner,
           repo: repo,
           artifact_id: artifactID,
           archive_format: "zip",
         });
+        console.log(`download: ${JSON.stringify(download.data)}`);
 
         const zip = new AdmZip(Buffer.from(download.data as ArrayBuffer));
         const zipEntries = zip.getEntries();
 
         zipEntries.forEach(function (zipEntry) {
+          console.log(`zipEntry: ${zipEntry.entryName}`);
           if (zipEntry.entryName === "report_json.json") {
             previousReport = JSON.parse(
               zipEntry.getData().toString("utf8"),
